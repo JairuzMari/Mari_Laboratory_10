@@ -11,12 +11,13 @@ import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./pages/HomeScreen";
 import MoviesScreen from "./pages/MoviesScreen";
 import CategoryScreen from "./pages/CategoryScreen";
+import MovieDetailsScreen from "./pages/MovieDetailsScreen";
 import ProfileScreen from "./pages/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// Stack navigator for Movies and its sub-category pages with hidden bottom nav requirement
+// Stack navigator for Movies, Categories, and Movie Details
 function MoviesStackNavigator() {
   return (
     <Stack.Navigator
@@ -37,14 +38,21 @@ function MoviesStackNavigator() {
           title: route.params?.categoryTitle || "Category",
         })}
       />
+      <Stack.Screen
+        name="MovieDetails"
+        component={MovieDetailsScreen}
+        options={({ route }) => ({
+          title: route.params?.title || "Movie Details",
+        })}
+      />
     </Stack.Navigator>
   );
 }
 
-// Helper to hide bottom tab when inside CategoryDetail sub-screen
+// Helper to hide bottom tab when inside sub-screens
 function getTabBarStyle(route) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
-  if (routeName === "CategoryDetail") {
+  if (routeName === "CategoryDetail" || routeName === "MovieDetails") {
     return { display: "none" };
   }
   return {
