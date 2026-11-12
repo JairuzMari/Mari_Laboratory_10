@@ -103,7 +103,7 @@ export default function App() {
             <Tab.Screen
               name="Home"
               component={HomeScreen}
-              options={{ title: "CineVerse Home" }}
+              options={{ title: "Home" }}
             />
             <Tab.Screen
               name="MoviesTab"
